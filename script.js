@@ -52,6 +52,23 @@
         answer.innerHTML = html;
       })
   })
+  cw1_3.addEventListener("click", function () {
+    answer.innerHTML = "Loading...";
+    fetch('https://jsonplaceholder.typicode.com/posts/1')
+      .then(response => response.json())
+      .then(post => {
+        console.log(post);
+        const html = `
+          <h2>Post z ID = ${post.id}</h2>
+          <div style = "border: 1px groove; background-color: Tomato">
+            <h3>${post.title}</h3>
+            <p>${post.body}</p>
+          </div>
+        `;
+       answer.innerHTML = html;
+    })
+});
+
   
   cw2.addEventListener("click", function () {
     //TODO
