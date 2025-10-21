@@ -7,7 +7,8 @@
   const cw2 = document.getElementById('cw2')
   const cw3 = document.getElementById('cw3')
   const answer = document.getElementById('answer')
-
+  const loadingPopup = document.getElementById('loadingPopup');
+  const loadingText = document.getElementById('loadingText');
   example.addEventListener("click", function () {
     fetch('https://jsonplaceholder.typicode.com/posts')
       .then(response => response.json())
@@ -18,9 +19,11 @@
   })
 
   cw1.addEventListener("click", function () {
+    showLoading("Loading...")
     fetch('https://jsonplaceholder.typicode.com/posts')
       .then(response => response.json())
       .then(posts => {
+        hideLoading();
         console.log(posts);
         console.log(posts[0]);
         console.log(posts[0].title);
@@ -39,10 +42,11 @@
   })
 
   cw1_2.addEventListener("click", function () {
-    answer.textContent = "Loading..."
+    showLoading("Loading...")
     fetch('https://jsonplaceholder.typicode.com/posts')
       .then(response => response.json())
       .then(posts => {
+        hideLoading();
         console.log(posts);
         console.log(posts[0]);
         console.log(posts[0].title);
@@ -60,12 +64,12 @@
       })
   })
   cw1_3.addEventListener("click", function () {
-    answer.innerHTML = "Loading...";
+    showLoading("Loading...")
     fetch('https://jsonplaceholder.typicode.com/posts/1')
       .then(response => response.json())
       .then(post => {
+        hideLoading();
         console.log(post);
-        console.log(post[0]);
         const html = `
           <h2>Post z ID = ${post.id}</h2>
           <div class="post">
@@ -73,12 +77,12 @@
             <p>${post.body}</p>
           </div>
         `;
-       answer.innerHTML = html;
+        answer.innerHTML = html;
     })
 });
 
   cw1_4.addEventListener("click", function () {
-    answer.innerHTML = "Processing...";
+    showLoading("Processing...")
     fetch("https://jsonplaceholder.typicode.com/posts", {
       method: "POST",
       headers: {
@@ -92,6 +96,7 @@
     })
       .then(response => response.json())
       .then(response => {
+        hideLoading();
         console.log("Odpowiedź serwera po POST:", response);
         console.log("Nowy post ID:", response.id);
         console.log("Tytuł:", response.title);
@@ -99,6 +104,17 @@
         answer.innerHTML = `<div class="post">Dodano nowy post o ID = ${response.id}</div>`;
       }) // komentarz ponieważ nie widzi zmian w commitcie
   }); // komentarz poniewaz program nie widzi zmian w commitcie
+
+function showLoading(message = "Loading...") {
+  loadingText.textContent = message;
+  loadingPopup.classList.remove('hidden');
+  loadingPopup.classList.add('active');
+}
+
+function hideLoading() {
+  loadingPopup.classList.add('hidden');
+  loadingPopup.classList.remove('active');
+}
 
   
   cw2.addEventListener("click", function () {
