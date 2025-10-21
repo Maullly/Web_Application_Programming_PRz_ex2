@@ -3,6 +3,7 @@
   const cw1 = document.getElementById('1_1')
   const cw1_2 = document.getElementById('1_2')
   const cw1_3 = document.getElementById('1_3')
+  const cw1_4 = document.getElementById('1_4')
   const cw2 = document.getElementById('cw2')
   const cw3 = document.getElementById('cw3')
   const answer = document.getElementById('answer')
@@ -68,6 +69,25 @@
        answer.innerHTML = html;
     })
 });
+
+  cw1_4.addEventListener("click", function () {
+    answer.innerHTML = "Processing...";
+    fetch("https://jsonplaceholder.typicode.com/posts", {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json"
+      },
+      body: JSON.stringify({
+        title: "Nowy post",
+        body: "Tekst.",
+        userId: 1
+      })
+    })
+      .then(response => response.json())
+      .then(response => {
+        answer.innerHTML = `<p><b>Dodano nowy post o ID = ${response.id}</b></p>`;
+      }) // komentarz ponieważ program widzi zmian w commitcie
+  }); // komentarz poniewaz program nie widzi zmian w commitcie
 
   
   cw2.addEventListener("click", function () {
