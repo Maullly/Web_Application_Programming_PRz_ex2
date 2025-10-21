@@ -22,6 +22,9 @@
       .then(response => response.json())
       .then(posts => {
         console.log(posts);
+        console.log(posts[0]);
+        console.log(posts[0].title);
+        console.log(posts[0].body);
         let html = '<h2>Lista postów JSONa</h2>';
         posts.forEach(post => {
           html += `
@@ -41,6 +44,9 @@
       .then(response => response.json())
       .then(posts => {
         console.log(posts);
+        console.log(posts[0]);
+        console.log(posts[0].title);
+        console.log(posts[0].body);
         let html = '<h2>Lista postów JSONa</h2>';
         posts.forEach(post => {
           html += `
@@ -59,6 +65,7 @@
       .then(response => response.json())
       .then(post => {
         console.log(post);
+        console.log(post[0]);
         const html = `
           <h2>Post z ID = ${post.id}</h2>
           <div class="post">
@@ -85,6 +92,10 @@
     })
       .then(response => response.json())
       .then(response => {
+        console.log("Odpowiedź serwera po POST:", response);
+        console.log("Nowy post ID:", response.id);
+        console.log("Tytuł:", response.title);
+        console.log("Treść:", response.body);
         answer.innerHTML = `<div class="post">Dodano nowy post o ID = ${response.id}</div>`;
       }) // komentarz ponieważ nie widzi zmian w commitcie
   }); // komentarz poniewaz program nie widzi zmian w commitcie
